@@ -1,0 +1,22 @@
+.container {
+    margin-top: 20px;
+}
+
+.creationItem {
+    padding: 20px;
+    background-color: red;
+    & *:first-child {
+        margin-right: 20px;
+    }
+}
+
+.creationSelect {
+    & *:first-child {
+        margin-right: 5px;
+    }
+}
+
+.input {
+    display: flex;
+    align-items: center;
+}

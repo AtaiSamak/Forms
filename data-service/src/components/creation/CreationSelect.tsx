@@ -22,7 +22,7 @@ const CreationSelect: FC = () => {
         () =>
             indexes.map((index) => (
                 <React.Fragment key={index}>
-                    <Input onDelete={deleteField(index)} />
+                    <Input handleDelete={deleteField(index)} />
                 </React.Fragment>
             )),
         [indexes]

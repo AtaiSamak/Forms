@@ -5,18 +5,14 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/creation.module.scss";
 
 type InputProps = {
-    onDelete: () => void;
+    handleDelete: () => void;
 };
 
-const Input: FC<InputProps> = ({ onDelete }) => {
+const Input: FC<InputProps> = ({ handleDelete }) => {
     const [value, setValue] = useState("");
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
-    };
-
-    const handleDelete = () => {
-        onDelete();
     };
 
     return (

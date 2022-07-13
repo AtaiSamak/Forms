@@ -8,18 +8,22 @@ import {
 import React, { FC } from "react";
 import styles from "../../styles/creation.module.scss";
 import MenuItem from "@mui/material/MenuItem";
-import { SelectChangeEvent } from "@mui/material/Select";
+import { SelectChangeEvent, IconButton } from "@mui/material";
 import CreationSelect from "./CreationSelect";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
 type CreationItemProps = {
-    children: React.ReactNode;
+    handleDelete: () => void;
 };
 
-const CreationItem: FC<CreationItemProps> = ({ children }) => {
-    const [type, setType] = React.useState("select");
+const CreationItem: FC<CreationItemProps> = ({ handleDelete }) => {
+    const [type, setType] = React.useState("input");
 
     const handleChange = (event: SelectChangeEvent) => {
         setType(event.target.value as string);
     };
+
     return (
         <Paper className={styles.creationItem}>
             <TextField label="Name" />
@@ -45,6 +49,18 @@ const CreationItem: FC<CreationItemProps> = ({ children }) => {
                 fullWidth
             />
             {type === "select" ? <CreationSelect /> : null}
+            <IconButton
+                className={styles.creationItemDelete}
+                onClick={handleDelete}
+                color="error"
+                aria-label="delete"
+                size="large"
+            >
+                <FontAwesomeIcon
+                    icon={faTrash}
+                    style={{ margin: 0, width: 24, height: 24 }}
+                />
+            </IconButton>
         </Paper>
     );
 };

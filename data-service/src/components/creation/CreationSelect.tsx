@@ -3,29 +3,38 @@ import Button from "@mui/material/Button";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "../../styles/creation.module.scss";
-import Input from "../UI/Input";
+import CreationSelectField from "./CreationSelectField";
 
 const CreationSelect: FC = () => {
-    const [id, setID] = useState<number>(0);
-    const [indexes, setIndexes] = useState<number[]>([]);
+    const [newFieldID, setNewFieldID] = useState<number>(0);
+    const [fieldIDs, setFieldIDs] = useState<number[]>([]);
+    const [fieldValues] = useState(new Map());
 
     const addField = () => {
-        setIndexes([...indexes, id]);
-        setID(id + 1);
+        setFieldIDs([...fieldIDs, newFieldID]);
+        setNewFieldID(newFieldID + 1);
     };
 
     const deleteField = (deleteID: number) => () => {
-        setIndexes(indexes.filter((id) => id !== deleteID));
+        setFieldIDs(fieldIDs.filter((id) => id !== deleteID));
+        fieldValues.delete(deleteID);
+    };
+
+    const handleFieldValueChange = (id: number) => (value: string) => {
+        fieldValues.set(id, value);
     };
 
     const fieldComponents = useMemo(
         () =>
-            indexes.map((index) => (
-                <React.Fragment key={index}>
-                    <Input handleDelete={deleteField(index)} />
+            fieldIDs.map((id) => (
+                <React.Fragment key={id}>
+                    <CreationSelectField
+                        handleDelete={deleteField(id)}
+                        setNewValue={handleFieldValueChange(id)}
+                    />
                 </React.Fragment>
             )),
-        [indexes]
+        [fieldIDs]
     );
 
     return (

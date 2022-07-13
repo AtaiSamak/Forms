@@ -3,11 +3,19 @@
 }
 
 .creationItem {
+    margin-bottom: 20px;
+    position: relative;
     padding: 20px;
     background-color: red;
     & *:first-child {
         margin-right: 20px;
     }
+}
+
+.creationItemDelete {
+    position: absolute !important;
+    top: 10px;
+    right: 10px;
 }
 
 .creationSelect {

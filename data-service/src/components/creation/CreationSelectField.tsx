@@ -4,15 +4,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/creation.module.scss";
 
-type InputProps = {
+type CreationSelectFieldProps = {
     handleDelete: () => void;
+    setNewValue: (value: string) => void;
 };
 
-const Input: FC<InputProps> = ({ handleDelete }) => {
+const CreationSelectField: FC<CreationSelectFieldProps> = ({
+    handleDelete,
+    setNewValue,
+}) => {
     const [value, setValue] = useState("");
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
+        setNewValue(e.target.value);
     };
 
     return (
@@ -39,4 +44,4 @@ const Input: FC<InputProps> = ({ handleDelete }) => {
     );
 };
 
-export default Input;
+export default CreationSelectField;
